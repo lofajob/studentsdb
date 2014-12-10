@@ -1,0 +1,37 @@
+/* Global Styles */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+
+/* Random Styles */
+
+/* Grops Selector */
+#group-selector {
+	margin-top: 10px;
+	padding: 5px;	
+}
+
+#group-selector select {
+	margin: 0;
+	border: 1px solid #cccccc;
+	width: 85%;
+	background-color: #ffffff;
+	height: 30px;
+	line-height: 30px;
+	color: #555555;
+}
+/*  */
+
+#footer {
+	border-top: 1px solid #dddddd;
+	padding-top: 10px;
+}
+
+.alert {
+	margin-top: 10px;
+}
+
+.pagination {
+	margin: 0px 450px;
+}
+
