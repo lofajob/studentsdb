@@ -1,14 +1,18 @@
-/* Global Styles */
+								/* Global Styles */
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 }
 
-/* Random Styles */
+								/* Random Styles */
 
 /* Grops Selector */
 #group-selector {
 	margin-top: 10px;
 	padding: 5px;	
+}
+
+#group-selector strong, #groups {
+	display: inline;
 }
 
 #group-selector select {
@@ -20,18 +24,34 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 30px;
 	color: #555555;
 }
-/*  */
+
 
 #footer {
 	border-top: 1px solid #dddddd;
 	padding-top: 10px;
 }
 
+#month, #form_button, #form_header {
+	text-align: center; ;
+}
+
+#form input, label {
+	margin: 0px 0;
+}
+#form_header{
+	margin-bottom: 20px; 
+}
+
+									/* Classes*/
 .alert {
 	margin-top: 10px;
 }
 
-.pagination {
-	margin: 0px 450px;
+#paginator {
+	text-align: center;
 }
 
+.img-circle {
+	height: 35px ; 
+	width: 30px;		
+}
