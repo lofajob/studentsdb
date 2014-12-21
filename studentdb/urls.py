@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 
     # Students urls
     url(r'^$', 'students.views.students_list', name='home'),
-    url(r'^students/add/$', 'students.views.students_add', name='students_add'),
+    url(r'^students/<add></add>/$', 'students.views.students_add', name='students_add'),
     url(r'^students/(?P<sid>\d+)/edit/$', 'students.views.students_edit', name='students_edit'),
     url(r'^students/(?P<sid>\d+)/delete/$', 'students.views.students_delete', name='students_delete'),
 

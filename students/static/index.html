@@ -1,5 +1,3 @@
-{% load static from staticfiles %}
-
 <!DOCTYPE html>
 <html lang="uk">
 	<head>
@@ -11,7 +9,7 @@
 			<!-- Include Styles -->
 			<link rel="stylesheet" 
 				href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
-            <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+            <link rel="stylesheet" type="text/css" href="./	css/main.css">
             <!--<style type="text/css">.col-xs-12, .col-xs-8, .col-xs-4{border: 1px solid red;}</style>-->
 
 	</head>
@@ -30,7 +28,7 @@
 				<!-- Groups Selector -->
 				<div class="col-xs-4" id="group-selector">
                     <strong>Група:</strong>
-                        <!--<div class="dropdown" id="groups">
+<!--                                    <div class="dropdown" id="groups">
                                       <button class="btn btn-default type="button" dropdown-toggle" data-toggle="dropdown">
                                         Всі Студенти
                                         <span class="caret"></span>
@@ -54,9 +52,9 @@
             <div class="row" id="sub-header">
                 <div class="col-xs-12">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="{% url 'home' %}">Студенти</a></li>
-                        <li role="presentation"><a href="/journal">Відвідування</a></li>
-                        <li role="presentation"><a href="{% url 'groups' %}">Групи</a></li>
+                        <li role="presentation" class="active"><a href="#">Студенти</a></li>
+                        <li role="presentation"><a href="#">Відвідування</a></li>
+                        <li role="presentation"><a href="#">Групи</a></li>
                     </ul>                   
                 </div>                
             </div>
@@ -71,7 +69,7 @@
                     <h2>База Студентів</h2>
 
                     <!-- Add Student Button -->
-                    <a class="btn btn-primary" href="{% url 'students_add' %}">Додати студента</a>
+                    <a class="btn btn-primary" href="#">Додати студента</a>
 
                     <!-- Stard Table of Student Listing -->
                     <table class="table table-hover table-striped">
@@ -88,13 +86,12 @@
 
                         <!-- First Student -->
                         <tbody>
-                            {% for student in students %}
                             <tr>
-                                <td>{{ forloop.counter }}</td>
-                                <td><img class="img-circle" src="{% static student.image %}"></td>
-                                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.first_name }}</a></td>
-                                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.last_name }}</a></td>
-                                <td>{{ student.ticket }}</td>
+                                <td>1</td>
+                                <td><img class="img-circle" src="http://fargate.ru/supernatural/cache/img.69526.c237b6e848f468c32ef968b09cc90ce7.jpg"></td>
+                                <td><a title="Редагувати" href="#">Павлюк</a></td>
+                                <td><a title="Редагувати" href="#">Андрій</a></td>
+                                <td>2123</td>
                                 <td>
                                     <div class="dropdown">
                                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
@@ -102,15 +99,57 @@
                                         <span class="caret"></span>
                                       </button>
                                       <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/journal/1">Відвідування</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'students_edit' student.id %}">Редагувати</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'students_delete' student.id %}">Видалити</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Відвідування</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Редагувати</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Видалити</a></li>
                                       </ul>
                                     </div>
                                 </td>
                             </tr>
-                            {% endfor %}
 
+                            <!-- Second Student -->
+                            <tr>
+                                <td>2</td>
+                                <td><img class="img-circle" src="http://kalininfoto.ru/d/348696/d/a4.jpg"></td>
+                                <td><a title="Редагувати" href="#">Сорока</a></td>
+                                <td><a title="Редагувати" href="#">Людмила</a></td>
+                                <td>2105</td>
+                                <td>
+                                    <div class="dropdown">
+                                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                        Дія
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Відвідування</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Редагувати</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Видалити</a></li>
+                                      </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Third Student -->
+                            <tr>
+                                <td>3</td>
+                                <td><img class="img-circle" src="http://bandera.lviv.ua/wp-content/uploads/2012/11/bandera1.jpg"></td>
+                                <td><a title="Редагувати" href="#">Степан</a></td>
+                                <td><a title="Редагувати" href="#">Бандера</a></td>
+                                <td>1158</td>
+                                <td>
+                                    <div class="dropdown">
+                                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                        Дія
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Відвідування</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Редагувати</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Видалити</a></li>
+                                      </ul>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <!-- End Table of Student Listing -->
