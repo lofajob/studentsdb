@@ -1,0 +1,88 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="uk">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<title>Сервіс обліку студентів - {% block meta_title %}{% endblock meta_title %}</title>
+		<meta name="descrioption"
+			value="Students Accounting Servise for educetional institution" />
+
+		<!-- Include Styles -->
+		<link rel="stylesheet" 
+				href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        
+        {% block extra_css %} {% endblock extra_css %}
+
+	</head>
+
+	<body>
+		<!-- Start Container -->
+		<div class="container">
+			<!-- Start Header -->
+			<div class="row" id="header">
+				
+				<!-- Logo -->
+				<div class="col-xs-8">
+					<h1>Сервіс обліку студентів</h1>	
+				</div>
+
+				<!-- Groups Selector -->
+				<div class="col-xs-4" id="group-selector">
+                    <strong>Група:</strong>
+                    <select>
+                         <option value="">Всі Студенти</option>
+                         <option value="">ЕК - 31, Альона Строкан (№ 22)</option>
+                         <option value="">ЕК - 32, Дехтяр Вікторія (№ 5)</option>
+                    </select> 
+				</div>
+			</div>
+			<!-- End Header -->
+
+            <!-- Start Subheader -->
+            <div class="row" id="sub-header">
+                <div class="col-xs-12">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="{% url 'home' %}">Студенти</a></li>
+                        <li role="presentation"><a href="/journal">Відвідування</a></li>
+                        <li role="presentation"><a href="{% url 'groups' %}">Групи</a></li>
+                    </ul>                   
+                </div>                
+            </div>
+            <!-- End Subheader -->
+
+            <!-- Start Content Columns -->
+            <div class="row" id="content-columns">
+                <div class="col-xs-12" id="content-column">
+
+                    <!-- Status Message -->
+                    {% comment "Not used alert so far" %}
+                    <div class="alert alert-warning">Зміни скасовано.</div>
+                    {% endcomment %}
+
+                    <h2>{% block title %}{% endblock title %}</h2>
+
+                    {% block content %}{% endblock content %}
+
+                </div>
+            </div>
+            <!-- End Content Columns-->
+
+            <!-- Start Footer -->
+            <div class="row" id="footer">
+                <div class="col-xs-12">
+                    &copy; 2014 Сервіс Обліку Студентів
+                </div>
+            </div>
+            <!-- End Footer -->
+
+		</div>
+		<!-- End Container -->
+
+		<!-- Javascript section -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+		<script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        {% block extra_js %}{% endblock extra_js %}
+	</body>
+</html>
