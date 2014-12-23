@@ -4,10 +4,10 @@
 {% load static from staticfiles %}
 
 
-{% block meta_title %}Групи{% endblock meta_title %}
+{% block meta_title %}Список Груп{% endblock meta_title %}
 
 
-{% block title %}Групи{% endblock title %}
+{% block title %}Список Груп{% endblock title %}
 
 
 {% block content %}
@@ -16,6 +16,7 @@
     <a class="btn btn-primary btn-lg" href="{% url 'groups_add' %}" role="button">Додати Групу</a>
 
     <!-- Start of Table -->
+    {% if groups %}
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -33,7 +34,7 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td><a href="{% url 'groups_edit' group.id %}">{{ group.name }}</a></td>
-                <td><a href="{% url 'students_edit' group.lider_id %}">{{ group.lider_id }}</a></td>
+                <td><a href="{% url 'students_edit' group.leader.id %}">{{ group.leader.name}}</a></td>
                 <td>
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
@@ -51,9 +52,14 @@
             {% endfor %}
         </tbody>
     </table>
+
+    {% else %}
+    <div class="alert alert-warning" role="alert">Поки немає існуючих груп</div>
+
+    {% endif %}
     <!-- End of Table -->
 
-     <!-- Paginator -->
+    <!-- Paginator -->
     <nav id="paginator">
         <ul class="pagination">
             <li class="active"><a href="#">1</a></li>

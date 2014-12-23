@@ -48,15 +48,15 @@ def groups_list(request):
     groups = (
         {   'id': 1,
             'name': u'ЕК_31',
-            'lider_id': 2},
+            'leader': {'id': 1, 'name': "Павлюк Андрій"}},
         {   'id': 2,
             'name': u'ЕК_31',
-            'lider_id': 1},
+            'leader': {'id': 2, 'name': "Сорока Людмила"}},
         {   'id': 3,
             'name': u'ЕК_33',
-            'lider_id': 3},
+            'leader': {'id': 3, 'name': "Степан Бандера"}},
     )
-    return render(request, 'groups/groups_list.html', {'groups': groups})
+    return render(request, 'students/groups_list.html', {'groups': groups})
 
 
 def groups_add(request):
