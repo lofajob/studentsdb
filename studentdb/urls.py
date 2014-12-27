@@ -21,3 +21,4 @@ urlpatterns = patterns('',
     # Admin urls
     url(r'^admin/', include(admin.site.urls)),
 )
+ 
