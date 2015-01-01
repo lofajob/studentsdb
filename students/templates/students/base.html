@@ -21,41 +21,47 @@
 		<!-- Start Container -->
 		<div class="container">
 			<!-- Start Header -->
-			<div class="row" id="header">
-				
-				<!-- Logo -->
-				<div class="col-xs-8">
-					<h1>Сервіс обліку студентів</h1>	
-				</div>
+            {% block header %}
+                <div class="row" id="header">
+                    
+                    <!-- Logo -->
+                    <div class="col-xs-8">
+                        <h1>Сервіс обліку студентів</h1>    
+                    </div>
 
-				<!-- Groups Selector -->
-				<div class="col-xs-4" id="group-selector">
-                    <strong>Група:</strong>
-                    <select>
-                         <option value="">Всі Студенти</option>
-                         <option value="">ЕК - 31, Альона Строкан (№ 22)</option>
-                         <option value="">ЕК - 32, Дехтяр Вікторія (№ 5)</option>
-                    </select> 
-				</div>
-			</div>
-			<!-- End Header -->
+                    <!-- Groups Selector -->
+                    <div class="col-xs-4" id="group-selector">
+                        <strong>Група:</strong>
+                        <select>
+                             <option value="">Всі Студенти</option>
+                             <option value="">ЕК - 31, Альона Строкан (№ 22)</option>
+                             <option value="">ЕК - 32, Дехтяр Вікторія (№ 5)</option>
+                        </select> 
+                    </div>
+                </div>
+            {% endblock header %}            
+
+            <!-- End Header -->
 
             <!-- Start Subheader -->
-            <div class="row" id="sub-header">
-                <div class="col-xs-12">
-                    <ul class="nav nav-tabs" role="tablist">
-                        
-                        {# appropriate variables for active tab #}
-                        {% url 'home' as url_home %}
-                        {% url 'journal' as url_journal %}
-                        {% url 'groups' as url_groups %}
+            {% block menu %}
+                <div class="row" id="sub-header">
+                    <div class="col-xs-12">
+                        <ul class="nav nav-tabs" role="tablist">
+                            
+                            {# appropriate variables for active tab #}
+                            {% url 'home' as url_home %}
+                            {% url 'journal' as url_journal %}
+                            {% url 'groups' as url_groups %}
 
-                        <li role="presentation" {% if request.path == url_home %}class="active" {% endif %}><a href="{% url 'home' %}">Студенти</a></li>
-                        <li role="presentation" {% if request.path == url_journal %}class="active" {% endif %}><a href="/journal">Відвідування</a></li>
-                        <li role="presentation" {% if request.path == url_groups %}class="active" {% endif %}><a href="{% url 'groups' %}">Групи</a></li>
-                    </ul>                   
-                </div>                
-            </div>
+                            <li role="presentation" {% if request.path == url_home %}class="active" {% endif %}><a href="{% url 'home' %}">Студенти</a></li>
+                            <li role="presentation" {% if request.path == url_journal %}class="active" {% endif %}><a href="/journal">Відвідування</a></li>
+                            <li role="presentation" {% if request.path == url_groups %}class="active" {% endif %}><a href="{% url 'groups' %}">Групи</a></li>
+                        </ul>                   
+                    </div>                
+                </div>
+            {% endblock menu %}
+
             <!-- End Subheader -->
 
             <!-- Start Content Columns -->
@@ -76,11 +82,13 @@
             <!-- End Main Page Content -->
 
             <!-- Start Footer -->
-            <div class="row" id="footer">
-                <div class="col-xs-12">
-                    &copy; 2014 Сервіс Обліку Студентів
+            {% block footer %}
+                <div class="row" id="footer">
+                    <div class="col-xs-12">
+                        &copy; 2014 Сервіс Обліку Студентів
+                    </div>
                 </div>
-            </div>
+            {% endblock footer %}
             <!-- End Footer -->
 
         </div>
