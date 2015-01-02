@@ -11,13 +11,13 @@ def groups_list(request):
     groups = (
         {   'id': 1,
             'name': u'ЕК_31',
-            'leader': {'id': 1, 'name': "Павлюк Андрій"}},
+            'leader': {'id': 1, 'name': u"Павлюк Андрій"}},
         {   'id': 2,
             'name': u'ЕК_31',
-            'leader': {'id': 2, 'name': "Сорока Людмила"}},
+            'leader': {'id': 2, 'name': u"Сорока Людмила"}},
         {   'id': 3,
             'name': u'ЕК_33',
-            'leader': {'id': 3, 'name': "Степан Бандера"}},
+            'leader': {'id': 3, 'name': u"Степан Бандера"}},
     )
     return render(request, 'students/groups_list.html', {'groups': groups})
 
