@@ -19,11 +19,27 @@
     <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th><a href="#">№</a></th>
-                <th><a href="#">Фото</a></th>
-                <th><a href="#">Прізвище &nbsp;&uarr;</a></th>
-                <th><a href="#">Ім’я</a></th>
-                <th><a href="#">№ Білету</a></th>
+                <th>№</th>
+                <th>Фото</th>
+                <th>
+                    <a href="{% url 'home' %}?order_by=last_name{% if request.GET.order_by == 'last_name' and request.GET.reverse != '1' %}&amp;reverse=1{% endif %}">Прізвище
+                    {% if request.GET.order_by == 'last_name' and request.GET.reverse != '1' %}&uarr;
+                    {% elif request.GET.order_by == 'last_name' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th><a href="{% url 'home' %}?order_by=first_name{% if request.GET.order_by == 'first_name' and request.GET.reverse != '1' %}&amp;reverse=1{% endif %}">Ім’я
+                    {% if request.GET.order_by == 'first_name' and request.GET.reverse != '1' %}&uarr;
+                    {% elif request.GET.order_by == 'first_name' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th><a href="{% url 'home' %}?order_by=ticket{% if request.GET.order_by == 'ticket' and request.GET.reverse != '1' %}&amp;reverse=1{% endif %}">№ Білету
+                    {% if request.GET.order_by == 'ticket' and request.GET.reverse != '1' %}&uarr;
+                    {% elif request.GET.order_by == 'ticket' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
                 <th>Дії</th>
             </tr>
         </thead>
