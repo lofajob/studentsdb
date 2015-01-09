@@ -2,13 +2,25 @@
 
 {% block pagination %}
     <!-- Pagination -->
+    {% if students.has_other_pages %}
+    {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
     <nav id="paginator">
         <ul class="pagination" >
-            <li><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">&raquo;</a></li>
+            {% if students.has_previous %}
+            <li><a href="{% url 'home' %}?page={{ students.previous_page_number }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&laquo;</a></li>
+            {% endif %}
+            {% for p in students.paginator.page_range %}
+            <li {% if students.number == p %}class="active"{% endif %}>
+                <a href="{% url 'home' %}?page={{ p }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+            {% if students.has_next %}
+            <li>
+                <a href="{% url 'home' %}?page={{ students.next_page_number }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&raquo;</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
+    {% endwith %}
+    {% endif %}
 {% endblock %}

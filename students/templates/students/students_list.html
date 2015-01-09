@@ -61,8 +61,8 @@
                 {% else %}
                 <td><img class="img-circle" src="{% static 'img/default_user.png' %}"></td>
                 {% endif %}
-                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.first_name }}</a></td>
                 <td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.last_name }}</a></td>
+                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.first_name }}</a></td>
                 <td>{{ student.ticket }}</td>
                 <td>
                     <div class="dropdown">
