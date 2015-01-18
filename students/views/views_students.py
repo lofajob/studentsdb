@@ -14,7 +14,6 @@ def students_list(request):
 	students = Student.objects.all()
 
 	# try to order student list
-
 	order_by = request.GET.get('order_by','')
 	if order_by in ('id', 'last_name', 'first_name', 'ticket'):
 		students = students.order_by(order_by)

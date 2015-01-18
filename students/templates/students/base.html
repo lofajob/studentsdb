@@ -5,14 +5,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<title>Сервіс обліку студентів - {% block meta_title %}{% endblock meta_title %}</title>
-		<meta name="descrioption"
-			value="Students Accounting Servise for educetional institution" />
+		<meta name="description"
+			value="Students Accounting Service for educational institution" />
 
 		<!-- Include Styles -->
-		<link rel="stylesheet" 
+		<link rel="stylesheet"
 				href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static 'css/main.css' %}">
-        
+
         {% block extra_css %} {% endblock extra_css %}
 
 	</head>
@@ -23,10 +23,10 @@
 			<!-- Start Header -->
             {% block header %}
                 <div class="row" id="header">
-                    
+
                     <!-- Logo -->
                     <div class="col-xs-8">
-                        <h1>Сервіс обліку студентів</h1>    
+                        <h1>Сервіс обліку студентів</h1>
                     </div>
 
                     <!-- Groups Selector -->
@@ -36,10 +36,10 @@
                              <option value="">Всі Студенти</option>
                              <option value="">ЕК - 31, Альона Строкан (№ 22)</option>
                              <option value="">ЕК - 32, Дехтяр Вікторія (№ 5)</option>
-                        </select> 
+                        </select>
                     </div>
                 </div>
-            {% endblock header %}            
+            {% endblock header %}
 
             <!-- End Header -->
 
@@ -49,7 +49,7 @@
                     <div class="col-xs-12">
                         <ul class="nav nav-tabs" role="tablist">
                             
-                            {# appropriate variables for active tab #}
+                            <!-- appropriate variables for active tab -->
                             {% url 'home' as url_home %}
                             {% url 'journal' as url_journal %}
                             {% url 'groups' as url_groups %}
@@ -57,8 +57,8 @@
                             <li role="presentation" {% if request.path == url_home %}class="active" {% endif %}><a href="{% url 'home' %}">Студенти</a></li>
                             <li role="presentation" {% if request.path == url_journal %}class="active" {% endif %}><a href="/journal">Відвідування</a></li>
                             <li role="presentation" {% if request.path == url_groups %}class="active" {% endif %}><a href="{% url 'groups' %}">Групи</a></li>
-                        </ul>                   
-                    </div>                
+                        </ul>
+                    </div>
                 </div>
             {% endblock menu %}
 

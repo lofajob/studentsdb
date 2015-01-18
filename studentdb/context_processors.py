@@ -4,4 +4,4 @@ from django.http import HttpRequest
 
 
 def students_proc(request):
-	return {'PORTAL_URL': 'http://'+request.META['SERVER_NAME']+':'+request.META['SERVER_PORT']} 
+	return {'PORTAL_URL': 'http://'+request.META['SERVER_NAME']+':'+request.META['SERVER_PORT']}

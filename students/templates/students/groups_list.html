@@ -18,23 +18,39 @@
     <!-- Start of Table -->
     {% if groups %}
     <table class="table table-hover table-striped">
+
+        {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
         <thead>
             <tr>
-                <th><a href="#">#</a></th>
-                <th><a href="#">Назва &nbsp;&uarr;</a></th>
-                <th><a href="#">Староста</a></th>
+                <th><a href="{% url 'groups' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">#
+                    {% if order_by == 'id' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'id' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+
+                <th><a href="{% url 'groups' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">Назва групи
+                    {% if not order_by %}&uarr;
+                    {% elif order_by == 'title' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'title' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+
+                <th>Староста</a></th>
                 <th>Дії</th>
             </tr>
         </thead>
-        
+        {% endwith %}
+
         <!-- Content of Table -->
         <tbody>
             <!-- Groups Loop -->
             {% for group in groups %}
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'groups_edit' group.id %}">{{ group.name }}</a></td>
-                <td><a href="{% url 'students_edit' group.leader.id %}">{{ group.leader.name}}</a></td>
+                <td>{{ group.id }}</td>
+                <td><a href="{% url 'groups_edit' group.id %}">{{ group.title }}</a></td>
+                <td>{%if group.leader %} <a href="{% url 'students_edit' group.leader.id %}">{{ group.leader.first_name }} {{ group.leader.last_name }}</a>{% else %} Немає {% endif %}</td>
                 <td>
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
@@ -45,8 +61,8 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'groups_edit' group.id %}">Редагувати</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'groups_delete' group.id %}">Видалити</a></li>
                       </ul>
-                    </div>                                
-                </td>                            
+                    </div>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -59,7 +75,7 @@
     <!-- End of Table -->
 
     <!-- Paginator -->
-    
+
     {% include "students/pagination.html" %}
 
 {% endblock content %}
