@@ -16,7 +16,7 @@
     <a class="btn btn-primary btn-lg" href="{% url 'groups_add' %}" role="button">Додати Групу</a>
 
     <!-- Start of Table -->
-    {% if groups %}
+    {% if content %}
     <table class="table table-hover table-striped">
 
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
@@ -46,7 +46,7 @@
         <!-- Content of Table -->
         <tbody>
             <!-- Groups Loop -->
-            {% for group in groups %}
+            {% for group in content %}
             <tr>
                 <td>{{ group.id }}</td>
                 <td><a href="{% url 'groups_edit' group.id %}">{{ group.title }}</a></td>

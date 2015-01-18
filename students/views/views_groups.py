@@ -22,19 +22,19 @@ def groups_list(request):
     elif not order_by:
         groups = groups.order_by('title')
 
-    # Paginate students' pages
-    """paginator = Paginator(students, 3)
+    # Paginate groups pages
+    paginator = Paginator(groups, 3)
     page = request.GET.get('page')
     try:
-        students = paginator.page(page)
+        groups = paginator.page(page)
     except PageNotAnInteger:
         # If page is not integer, deliver first page
-        students = paginator.page(1)
+        groups = paginator.page(1)
     except EmptyPage:
         #if page is out of range (e.g. 9999), deliver last page result
-        students = paginator.page(paginator.num_pages)"""
+        groups = paginator.page(paginator.num_pages)
 
-    return render(request, 'students/groups_list.html', {'groups': groups})
+    return render(request, 'students/groups_list.html', {'content': groups})
 
 
 def groups_add(request):
