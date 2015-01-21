@@ -1,9 +1,7 @@
 """
 Django settings for studentdb project.
-
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
-
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
@@ -15,11 +13,9 @@ from django.conf import global_settings
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
 #old_one
-#PORTAL_URL = 'http://localhost:8000'
+PORTAL_URL = 'http://localhost:8000'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -90,6 +86,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
 
 TEMPLATE_CONTEXT_PROCESSORS = \
