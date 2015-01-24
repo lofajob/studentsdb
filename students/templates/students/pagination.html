@@ -18,7 +18,7 @@
     <nav id="paginator">
         <ul class="pagination" >
             {% if content.has_previous %}
-            <li><a href="{{ current_url }}?page={{ content.previous_page_number }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&laquo;</a></li>
+            <li><a href="{{ current_url }}?page={{ content.first_page}}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&laquo;</a></li>
             {% endif %}
             {% for p in content.paginator.page_range %}
             <li {% if content.number == p %}class="active"{% endif %}>
@@ -27,7 +27,7 @@
             {% endfor %}
             {% if content.has_next %}
             <li>
-                <a href="{{ current_url }}?page={{ content.next_page_number }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&raquo;</a>
+                <a href="{{ current_url }}?page={{ content.paginator.num_pages }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&raquo;</a>
             </li>
             {% endif %}
         </ul>
