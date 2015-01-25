@@ -9,6 +9,7 @@ class Student(models.Model):
     class Meta(object):
         verbose_name = u"Студент"
         verbose_name_plural = u"Студенти"
+        ordering = ["last_name"]
 
     first_name = models.CharField(
         max_length=256,

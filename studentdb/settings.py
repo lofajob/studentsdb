@@ -9,13 +9,13 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 from django.conf import global_settings
-
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 #old_one
-PORTAL_URL = 'http://localhost:8000'
+#PORTAL_URL = 'http://localhost:8000'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -60,13 +60,11 @@ WSGI_APPLICATION = 'studentdb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+import sys
+sys.path.append('/home/oleksiy/work/virtualenvs/studentdb/src/database_settings')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '..', 'db.sqlite3'),
-    }
-}
+from db import DATABASES
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
