@@ -18,16 +18,16 @@
     <nav id="paginator">
         <ul class="pagination" >
             {% if content.has_previous %}
-            <li><a href="{{ current_url }}?page={{ content.first_page}}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&laquo;</a></li>
+            <li><a href="{{ current_url }}?page=1{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}">&laquo;</a></li>
             {% endif %}
             {% for p in content.paginator.page_range %}
             <li {% if content.number == p %}class="active"{% endif %}>
-                <a href="{{ current_url }}?page={{ p }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">{{ p }}</a>
+                <a href="{{ current_url }}?page={{ p }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}">{{ p }}</a>
             </li>
             {% endfor %}
             {% if content.has_next %}
             <li>
-                <a href="{{ current_url }}?page={{ content.paginator.num_pages }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&raquo;</a>
+                <a href="{{ current_url }}?page={{ content.paginator.num_pages }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}">&raquo;</a>
             </li>
             {% endif %}
         </ul>
