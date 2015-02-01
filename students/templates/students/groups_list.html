@@ -29,7 +29,7 @@
                     </a>
                 </th>
 
-                <th><a href="{% url 'groups' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">Назва групи
+                <th><a href="{% url 'groups' %}?order_by=title{% if not order_by and reverse != '1' %}&amp;reverse=1{% elif order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">Назва групи
                     {% if not order_by %}&uarr;
                     {% elif order_by == 'title' and reverse != '1' %}&uarr;
                     {% elif order_by == 'title' %}&darr;
@@ -37,7 +37,7 @@
                     </a>
                 </th>
 
-                <th>Староста</a></th>
+                <th>Староста</th>
                 <th>Дії</th>
             </tr>
         </thead>

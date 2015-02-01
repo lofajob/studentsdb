@@ -32,7 +32,7 @@
                 <th>Фото</th>
 
                 <th>
-                    <a href="{% url 'home' %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">Прізвище
+                    <a href="{% url 'home' %}?order_by=last_name{% if not order_by and reverse != '1' %}&amp;reverse=1{% elif order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">Прізвище
                     {% if not order_by %}&uarr;
                     {% elif order_by == 'last_name' and reverse != '1' %}&uarr;
                     {% elif order_by == 'last_name' %}&darr;

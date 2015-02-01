@@ -30,4 +30,4 @@ class Group(models.Model):
             return u"%s (%s %s)" % (self.title, self.leader.first_name,
                  self.leader.last_name)
         else:
-            return u"%s" % (self.title,)
+            return u"%s" % (self.title)

@@ -23,6 +23,11 @@ urlpatterns = patterns('',
     # Journal urls
     url(r'^journal/', 'students.views.views_journal.feed', name='journal'),
 
+
+    # Exams urls
+    url(r'^exams/', 'students.views.views_exams.exams_list', name='exams'),
+    url(r'^exams_add/', 'students.views.views_exams.exam_add', name='exam_add'),
+
     # Admin urls
     url(r'^admin/', include(admin.site.urls)),
 )
