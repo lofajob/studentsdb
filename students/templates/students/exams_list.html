@@ -59,7 +59,7 @@
             {% for exam in content %}
             <tr>
                 <td>{{ exam.id }}</td>
-                <td>{{ exam.date }}</td>
+                <td>{{ exam.date|date:"d.m.Y H:i"}}</td>
                 <td>{{ exam.group.title }}</td>
                 <td>{{ exam.subject }}</td>
                 <td>{{ exam.educator }}</td>
