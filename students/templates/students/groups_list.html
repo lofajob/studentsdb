@@ -49,7 +49,7 @@
             {% for group in content %}
             <tr>
                 <td>{{ group.id }}</td>
-                <td><a href="{% url 'groups_edit' group.id %}">{{ group.title }}</a></td>
+                <td><a href="{% url 'students_in_group' group.id %}">{{ group.title }}</a></td>
                 <td>{%if group.leader %} <a href="{% url 'students_edit' group.leader.id %}">{{ group.leader.first_name }} {{ group.leader.last_name }}</a>{% else %} Немає {% endif %}</td>
                 <td>
                     <div class="dropdown">

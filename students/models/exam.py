@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from datetime import datetime
 
 
 class Exam(models.Model):
@@ -38,3 +39,23 @@ class Exam(models.Model):
 
     def __unicode__(self):
         return u"%s, %s" % (self.subject, self.group.title)
+
+
+class Exam_result(models.Model):
+    """Model for result of examination"""
+
+    class Meta(object):
+        verbose_name = u"Результати іспиту"
+        verbose_name_plural = u"Результати іспиту"
+        #ordering = ["date"]
+
+    exam = models.OneToOneField('Exam', verbose_name=u"Іспит")
+
+    student = models.ForeignKey('Student', verbose_name=u"Студент")
+    #, limit_choices_to={'student_group_id': Exam.group}
+
+    grade = models.IntegerField(
+        max_length=3,
+        blank=True,
+        null=True,
+        verbose_name=u"Результат")

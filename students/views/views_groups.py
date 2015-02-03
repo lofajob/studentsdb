@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from ..models import Group
+from ..models import Group, Student
 
 
 # Views for Groups
@@ -47,3 +47,17 @@ def groups_edit(request, sid):
 
 def groups_delete(request, sid):
     return HttpResponse('<h1>Delete Group %s </h1>' % sid)
+
+
+def students_in_group(request, sid):
+    students = Student.objects.all().filter(student_group=sid)
+    group = Group.objects.get(id=sid)
+
+    # try to order students list in group
+    order_by = request.GET.get('order_by','')
+    if order_by in ('id', 'last_name'):
+        students = students.order_by(order_by)
+        if request.GET.get('reverse', '') == '1':
+            students = students.reverse()
+
+    return render(request, 'students/students_in_group.html', {'students': students, 'group': group})
