@@ -16,11 +16,10 @@ class Exam(models.Model):
         blank=False,
         verbose_name=u"Дата та час проведення")
 
-    group = models.OneToOneField('Group',
-        verbose_name=u"Група",
-        blank=True,
+    group_examing = models.ForeignKey('Group',
+        blank=False,
         null=True,
-        on_delete=models.SET_NULL)
+        verbose_name=u"Група")
 
     subject = models.CharField(
         max_length=256,
@@ -38,7 +37,7 @@ class Exam(models.Model):
         verbose_name=u"Аудиторія")
 
     def __unicode__(self):
-        return u"%s, %s" % (self.subject, self.group.title)
+        return u"%s, %s" % (self.subject, self.group_examing.title)
 
 
 class Exam_result(models.Model):
@@ -47,11 +46,10 @@ class Exam_result(models.Model):
     class Meta(object):
         verbose_name = u"Результати іспиту"
         verbose_name_plural = u"Результати іспиту"
-        #ordering = ["date"]
 
-    exam = models.OneToOneField('Exam', verbose_name=u"Іспит")
+    exam_res = models.ForeignKey('Exam', verbose_name=u"Іспит")
 
-    student = models.ForeignKey('Student', verbose_name=u"Студент")
+    student_res = models.ForeignKey('Student', verbose_name=u"Студент")
     #, limit_choices_to={'student_group_id': Exam.group}
 
     grade = models.IntegerField(
@@ -59,3 +57,6 @@ class Exam_result(models.Model):
         blank=True,
         null=True,
         verbose_name=u"Результат")
+
+    def __unicode__(self):
+        return u"%s %s" % (self.student_res.last_name, self.student_res.first_name)

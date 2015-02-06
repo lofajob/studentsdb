@@ -60,7 +60,7 @@
             <tr>
                 <td>{{ exam.id }}</td>
                 <td>{{ exam.date|date:"d.m.Y H:i"}}</td>
-                <td>{{ exam.group.title }}</td>
+                <td>{{ exam.group_examing.title }}</td>
                 <td>{{ exam.subject }}</td>
                 <td>{{ exam.educator }}</td>
                 <td>{{ exam.place }}</td>
@@ -71,7 +71,7 @@
     </table>
 
     {% else %}
-    <div class="alert alert-warning" role="alert">Поки немає існуючих груп</div>
+    <div class="alert alert-warning" role="alert">В базі немає результатів іспитів</div>
 
     {% endif %}
     <!-- End of Table -->

@@ -19,12 +19,7 @@
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
         <thead>
             <tr>
-                <th><a href="{% url 'students_in_group' group.id %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">№
-                    {% if order_by == 'id' and reverse != '1' %}&uarr;
-                    {% elif order_by == 'id' %}&darr;
-                    {% endif %}
-                    </a>
-                </th>
+                <th>№</th>
 
                 <th><a href="{% url 'students_in_group' group.id  %}?order_by=last_name{% if not order_by and reverse != '1' %}&amp;reverse=1{% elif order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">ПІБ
                     {% if not order_by %}&uarr;
@@ -43,7 +38,7 @@
             <!-- Groups Loop -->
             {% for student in students %}
             <tr>
-                <td>{{ student.id }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ student.last_name }} {{ student.first_name }} {{ student.middle_name}}</a></td>
                 <td>
                     <div class="dropdown">

@@ -14,7 +14,7 @@ def exams_list(request):
 
     # try to order exams list
     order_by = request.GET.get('order_by','')
-    if order_by in ('date', 'subject', 'group'):
+    if order_by in ('date', 'subject', 'group_examing'):
         exams = exams.order_by(order_by)
         if request.GET.get('reverse', '') == '1':
             exams = exams.reverse()
