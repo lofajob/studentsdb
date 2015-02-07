@@ -26,8 +26,9 @@ urlpatterns = patterns('',
 
 
     # Exams urls
-    url(r'^exams/', 'students.views.views_exams.exams_list', name='exams'),
-    url(r'^exams_add/', 'students.views.views_exams.exam_add', name='exam_add'),
+    url(r'^exams/$', 'students.views.views_exams.exams_list', name='exams'),
+    url(r'^exams_add/$', 'students.views.views_exams.exam_add', name='exam_add'),
+    url(r'^exams/(?P<sid>\d+)/exam_result/$', 'students.views.views_exams.exam_result', name='exam_result'),
 
     # Admin urls
     url(r'^admin/', include(admin.site.urls)),

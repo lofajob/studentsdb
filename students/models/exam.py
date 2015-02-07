@@ -46,6 +46,7 @@ class Exam_result(models.Model):
     class Meta(object):
         verbose_name = u"Результати іспиту"
         verbose_name_plural = u"Результати іспиту"
+        #ordering = ["student_res"]
 
     exam_res = models.ForeignKey('Exam', verbose_name=u"Іспит")
 

@@ -32,10 +32,10 @@
                     </a>
                 </th>
 
-                <th><a href="{% url 'exams' %}?order_by=group{% if order_by == 'group' and reverse != '1' %}&amp;reverse=1{% endif %}">Група
+                <th><a href="{% url 'exams' %}?order_by=group_examing{% if order_by == 'group_examing' and reverse != '1' %}&amp;reverse=1{% endif %}">Група
 
-                    {% if order_by == 'group' and reverse != '1' %}&uarr;
-                    {% elif order_by == 'group' %}&darr;
+                    {% if order_by == 'group_examing' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'group_examing' %}&darr;
                     {% endif %}
                     </a>
                 </th>
@@ -59,7 +59,7 @@
             {% for exam in content %}
             <tr>
                 <td>{{ exam.id }}</td>
-                <td>{{ exam.date|date:"d.m.Y H:i"}}</td>
+                <td><a href="{% url 'exam_result' exam.id %}">{{ exam.date|date:"d.m.Y H:i"}}</a></td>
                 <td>{{ exam.group_examing.title }}</td>
                 <td>{{ exam.subject }}</td>
                 <td>{{ exam.educator }}</td>

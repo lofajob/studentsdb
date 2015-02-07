@@ -1,0 +1,56 @@
+{% extends "students/base.html" %}
+
+
+{% load static from staticfiles %}
+
+
+{% block meta_title %}Результати іспиту{% endblock meta_title %}
+
+
+{% block title %}Результати іспиту групи {{ exam.group_examing.title }}{% endblock title %}
+
+
+{% block content %}
+
+    <!-- Start of Table -->
+    {% if results %}
+    <table class="table table-hover table-striped">
+
+        {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+        <thead>
+            <tr>
+                <th>№</th>
+                <th><a href="{% url 'exam_result' exam.id  %}?order_by=last_name{% if not order_by and reverse != '1' %}&amp;reverse=1{% elif order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">ПІБ
+                    {% if not order_by %}&uarr;
+                    {% elif order_by == 'last_name' and reverse != '1' %}&uarr;
+                    {% elif order_by == 'last_name' %}&darr;
+                    {% endif %}
+                    </a>
+                </th>
+                <th>Оцінка</th>
+
+            </tr>
+        </thead>
+        {% endwith %}
+
+        <!-- Content of Table -->
+        <tbody>
+            <!-- Groups Loop -->
+            {% for result in results %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ result.student_res.last_name }} {{ result.student_res.first_name }} {{ result.student_res.middle_name}}</a></td>
+                <td>{{ result.grade }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <div class="alert alert-warning" role="alert">Немає результатів іспиту!</div>
+
+    {% endif %}
+    <!-- End of Table -->
+
+{% endblock content %}

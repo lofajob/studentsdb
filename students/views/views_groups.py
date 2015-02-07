@@ -19,8 +19,7 @@ def groups_list(request):
         groups = groups.order_by(order_by)
         if request.GET.get('reverse', '') == '1':
             groups = groups.reverse()
-    elif not order_by:
-        groups = groups.order_by('title')
+
 
     # Paginate groups pages
     paginator = Paginator(groups, 3)
@@ -55,7 +54,7 @@ def students_in_group(request, sid):
 
     # try to order students list in group
     order_by = request.GET.get('order_by','')
-    if order_by in ('id', 'last_name'):
+    if order_by == 'last_name':
         students = students.order_by(order_by)
         if request.GET.get('reverse', '') == '1':
             students = students.reverse()
