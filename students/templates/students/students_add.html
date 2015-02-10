@@ -1,0 +1,104 @@
+{% extends "students/base.html" %}
+
+
+{% load static from staticfiles %}
+
+
+{% block meta_title %}Додати Студента{% endblock meta_title %}
+
+
+{% block title %}{% endblock title %}
+
+
+{% block content %}
+
+<!-- Form -->
+<div class="panel panel-info col-md-12 ">
+    <div class="panel-heading" align="center">
+        <h4>Додати Студента</h4>
+    </div>
+    <br />
+
+
+    <div class="row" id="form">
+
+        <form action="{% url 'students_add' %}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" name="myform" >
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="first_name" class="col-sm-5 control-label">Ім’я*</label>
+                <div class="col-sm-3">
+                    <input type="text" value="" class="form-control" id="first_name" name="first_name" placeholder="Введіть Ваше ім’я" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name" class="col-sm-5 control-label">Прізвище*</label>
+                <div class="col-sm-3">
+                    <input type="text" value="" class="form-control" id="last_name" name="last_name" placeholder="Введіть Ваше прізвище" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="middle_name" class="col-sm-5    control-label">По-батькові:</label>
+                <div class="col-sm-3">
+                    <input type="text" value="" class="form-control" id="middle_name" name="middle_name" placeholder="Введіть Ваше ім’я по батькові" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ticket" class="col-sm-5    control-label">Білет*</label>
+                <div class="col-sm-3">
+                    <input type="text" value="" class="form-control" id="ticket" name="ticket" placeholder="Введіть номер білету" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="birthday" class="col-sm-5    control-label">Дата народження</label>
+                <div class="col-sm-3">
+                    <input type="text" value="" class="form-control" id="birthday" name="birthday" placeholder="Напр. 1984-12-30" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="photo" class="col-sm-5    control-label">Фото</label>
+                <div class="col-sm-3">
+                    <input type="file" value="" id="photo" name="photo" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="student_group" class="col-sm-5 control-label">Група*</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="student_group" id="student_group">
+                        <option value="">Виберіть групу</option>
+                        {% for group in groups %}
+                        <option value="{{ group.id }}">{{ group.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes" class="col-sm-5 control-label">Додаткові нотатки</label>
+                <div class="col-sm-3 ">
+                    <textarea class="form-control" rows="3" name="notes" id="notes" placeholder="Внести примітки"></textarea>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3" id="form_button">
+                    <div class="alert alert-info" role="alert">
+                        <input type="submit" value="Додати" name="add_button" class="btn btn-primary" />
+                        <button type="submit" name="cancel_button" class="btn-link">Скасувати</button>
+                        <!-- <button type="submit" class="btn btn-primary">Зберегти</button> -->
+                        <!-- <button type="reset" class="btn-link">Скасувати</button> -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
