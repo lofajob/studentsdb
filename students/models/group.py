@@ -9,6 +9,7 @@ class Group(models.Model):
     class Meta(object):
         verbose_name = u"Група"
         verbose_name_plural = u"Групи"
+        ordering = ['title']
 
     title = models.CharField(
         max_length=256,
