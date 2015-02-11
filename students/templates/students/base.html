@@ -73,7 +73,7 @@
                     <!-- Status Message -->
                     {% block status_message %}
                     {% if request.GET.status_message %}
-                    <div class="alert alert-warning" role="alert">{{ request.GET.status_message }}</div>
+                    <div class="alert {% if request.GET.success == '1' %}alert-success{% else %}alert-warning"{% endif %} role="alert">{{ request.GET.status_message }}</div>
                     {% endif %}
                     {% endblock %}
 

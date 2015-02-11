@@ -10,11 +10,7 @@
 {% block title %}{% endblock title %}
 
 {% block status_message %}
-    {% if errors %}
-    <div class="alert alert-warning" role="alert">
-        Будь ласка, виправте наступні помилки
-    </div>
-    {% endif %}
+
 
 {% endblock status_message %}
 
@@ -22,10 +18,18 @@
 
 <!-- Form -->
 <div class="panel panel-info col-md-12 ">
+    {% if errors %}
+        <div class="alert alert-warning" role="alert">
+            <p>Будь ласка, виправте наступні помилки</p>
+        </div>
+    {% else %}
         <div class="panel-heading" align="center">
             <h4>Додати Студента</h4>
         </div>
-    <br />
+        <br />
+    {% endif %}
+
+
 
 
     <div class="row" id="form">
