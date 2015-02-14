@@ -4,7 +4,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
+from django.core.context_processors import csrf
 from datetime import datetime
+from PIL import Image
 
 from ..models import Student, Group
 
@@ -23,7 +25,7 @@ def students_list(request):
 			students = students.reverse()
 
 	# Paginate students' pages
-	paginator = Paginator(students, 3)
+	paginator = Paginator(students, 4)
 	page = request.GET.get('page')
 	try:
 		students = paginator.page(page)
@@ -45,9 +47,14 @@ def students_add(request):
 
 			# errors collection
 			errors = {}
+
 			# validate student data will go here
+			data = {}
+			data.update(csrf(request))
+			# values middle_name and notes can be blank and so far not require validation
 			data = {'middle_name': request.POST.get('middle_name'),
 					'notes': request.POST.get('notes')}
+
 
 			# validate user input
 			first_name = request.POST.get('first_name','').strip()
@@ -91,8 +98,22 @@ def students_add(request):
 				#data['student_group'] = Group.objects.get(id=student_group)
 
 			photo = request.FILES.get('photo')
+			# validate photo
 			if photo:
-				data['photo'] = photo
+
+				try:
+					img = Image.open(request.FILES.get('photo'))
+					img.verify()
+
+					if photo.size > 2000000:
+						errors['photo'] = u"Виберіть зображення, що не перевищує 2 МБ"
+					else:
+						data['photo'] = photo
+				except IOError:
+					errors['photo'] = u"Ви вибрали невірний тип файлу"
+				except:
+					errors['photo'] = u"Виникла помилка при завантажені зображення!"
+
 
 			# save student
 			if not errors:
