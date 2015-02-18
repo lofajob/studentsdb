@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label for="middle_name" class="col-sm-5    control-label">По-батькові:</label>
                 <div class="col-sm-7">
-                    <input type="text" value="{{ request.POST.midlle_name }}" class="form-control" id="middle_name" name="middle_name" placeholder="Введіть Ваше ім’я по батькові" />
+                    <input type="text" value="{{ request.POST.middle_name }}" class="form-control" id="middle_name" name="middle_name" placeholder="Введіть Ваше ім’я по батькові" />
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
             <div class="form-group {% if errors.photo %}has-error{% endif %}">
                 <label for="photo" class="col-sm-5    control-label">Фото</label>
                 <div class="col-sm-7">
-                    <input type="file" value="" id="photo" name="photo" />
+                    <input type="file" id="photo" name="photo" />
                     <span class="help-block">{{ errors.photo }}</span>
                 </div>
             </div>
@@ -100,7 +100,7 @@
             <div class="form-group">
                 <label for="notes" class="col-sm-5 control-label">Додаткові нотатки</label>
                 <div class="col-sm-7 ">
-                    <textarea class="form-control" rows="3" name="notes" id="notes" value="{{ request.POST.notes }}" placeholder="Внести примітки"></textarea>
+                    <textarea class="form-control" rows="3" name="notes" id="notes" placeholder="Внести примітки">{{ request.POST.notes }}</textarea>
                 </div>
             </div>
 

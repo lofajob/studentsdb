@@ -54,11 +54,13 @@
                             {% url 'journal' as url_journal %}
                             {% url 'groups' as url_groups %}
                             {% url 'exams' as url_exams %}
+                            {% url 'contact_admin' as url_contact %}
 
                             <li role="presentation" {% if request.path == url_home %}class="active" {% endif %}><a href="{% url 'home' %}">Студенти</a></li>
                             <li role="presentation" {% if request.path == url_journal %}class="active" {% endif %}><a href="/journal">Відвідування</a></li>
                             <li role="presentation" {% if request.path == url_groups %}class="active" {% endif %}><a href="{% url 'groups' %}">Групи</a></li>
                             <li role="presentation" {% if request.path == url_exams %}class="active" {% endif %}><a href="{% url 'exams' %}">Іспити</a></li>
+                            <li role="presentation" {% if request.path == url_contact %}class="active" {% endif %}><a href="{% url 'contact_admin' %}">Контакт</a></li>
                         </ul>
                     </div>
                 </div>

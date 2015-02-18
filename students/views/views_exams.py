@@ -13,7 +13,7 @@ def exams_list(request):
     exams = Exam.objects.all()
 
     # try to order exams list
-    order_by = request.GET.get('order_by','')
+    order_by = request.GET.get('order_by', '')
     if order_by in ('date', 'subject', 'group_examing'):
         exams = exams.order_by(order_by)
         if request.GET.get('reverse', '') == '1':
@@ -27,7 +27,7 @@ def exam_result(request, sid):
     exam = Exam.objects.get(id=sid)
 
     # try to order students list in group
-    order_by = request.GET.get('order_by','')
+    order_by = request.GET.get('order_by', '')
     if order_by == 'last_name':
         results = results.order_by('student_res')
         if request.GET.get('reverse', '') == '1':

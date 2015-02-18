@@ -14,12 +14,11 @@ def groups_list(request):
     groups = Group.objects.all()
 
     # try to order groups list
-    order_by = request.GET.get('order_by','')
+    order_by = request.GET.get('order_by', '')
     if order_by in ('id', 'title'):
         groups = groups.order_by(order_by)
         if request.GET.get('reverse', '') == '1':
             groups = groups.reverse()
-
 
     # Paginate groups pages
     paginator = Paginator(groups, 3)
@@ -30,7 +29,7 @@ def groups_list(request):
         # If page is not integer, deliver first page
         groups = paginator.page(1)
     except EmptyPage:
-        #if page is out of range (e.g. 9999), deliver last page result
+        # if page is out of range (e.g. 9999), deliver last page result
         groups = paginator.page(paginator.num_pages)
 
     return render(request, 'students/groups_list.html', {'content': groups})
@@ -53,7 +52,7 @@ def students_in_group(request, sid):
     group = Group.objects.get(id=sid)
 
     # try to order students list in group
-    order_by = request.GET.get('order_by','')
+    order_by = request.GET.get('order_by', '')
     if order_by == 'last_name':
         students = students.order_by(order_by)
         if request.GET.get('reverse', '') == '1':

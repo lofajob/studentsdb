@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 class Exam(models.Model):
+
     """Examination Model"""
 
     class Meta(object):
@@ -41,6 +42,7 @@ class Exam(models.Model):
 
 
 class Exam_result(models.Model):
+
     """Model for result of examination"""
 
     class Meta(object):

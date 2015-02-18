@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+#from students.views.contact_admin import Contact_admin
 
 from .settings import MEDIA_ROOT, DEBUG
 
@@ -10,7 +11,7 @@ urlpatterns = patterns('',
 
     # Students urls
     url(r'^$', 'students.views.views_students.students_list', name='home'),
-    url(r'^students/<add></add>/$', 'students.views.views_students.students_add', name='students_add'),
+    url(r'^students/add/$', 'students.views.views_students.students_add', name='students_add'),
     url(r'^students/(?P<sid>\d+)/edit/$', 'students.views.views_students.students_edit', name='students_edit'),
     url(r'^students/(?P<sid>\d+)/delete/$', 'students.views.views_students.students_delete', name='students_delete'),
 
@@ -32,10 +33,14 @@ urlpatterns = patterns('',
 
     # Admin urls
     url(r'^admin/', include(admin.site.urls)),
+
+    # Contact Admin
+    url(r'^contact-admin/$', 'students.views.contact_admin.contact_admin', name='contact_admin'),
+    #url(r'^contact-admin/$', Contact_admin.as_view(), name='contact_admin'),
 )
 
 if DEBUG:
-    #serve files from media folder
+    # serve files from media folder
     urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': MEDIA_ROOT}))
+                            url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+                                'document_root': MEDIA_ROOT}))

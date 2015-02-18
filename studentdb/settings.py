@@ -6,16 +6,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-
 from django.conf import global_settings
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
-#old_one
-#PORTAL_URL = 'http://localhost:8000'
+# old_one
+# PORTAL_URL = 'http://localhost:8000'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -40,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'students',
 )
 
@@ -61,14 +60,15 @@ WSGI_APPLICATION = 'studentdb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 import sys
-sys.path.append('/home/oleksiy/work/virtualenvs/studentdb/src/database_settings')
+sys.path.append(
+    '/home/oleksiy/work/virtualenvs/studentdb/src/database_settings')
 
 from db import DATABASES
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'ua-ua'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'Europe/Kiev'
 
@@ -85,10 +85,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 TEMPLATE_CONTEXT_PROCESSORS = \
     global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    "django.core.context_processors.request",
-    "studentdb.context_processors.students_proc",
-)
+        "django.core.context_processors.request",
+        "studentdb.context_processors.students_proc",
+    )
+
+# email settings
+ADMIN_EMAIL = 'lofa_job@ukr.net'
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'lofa_job@ukr.net'
+EMAIL_HOST_PASSWORD = 'IsTm_RG3pCd7JhbxLP8p9Q'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
