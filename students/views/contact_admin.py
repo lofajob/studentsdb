@@ -6,7 +6,8 @@ from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Div
+from crispy_forms.bootstrap import FormActions, StrictButton
 #from django.views.generic.edit import FormView
 
 from studentdb.settings import ADMIN_EMAIL
@@ -34,7 +35,7 @@ class ContactForm(forms.Form):
 		self.helper.field_class = 'col-sm-10'
 
 		# form buttons
-		self.helper.add_input(Submit('send_button', u'Надіслати'))
+		self.helper.add_input(Submit('send_button', u'Надіслати', css_class="btn btn-primary col-md-offset"))
 
 
 	from_email = forms.EmailField(

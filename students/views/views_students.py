@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DeleteView
 from django.forms import ModelForm
 
 from crispy_forms.helper import FormHelper
@@ -149,9 +149,9 @@ def students_add(request):
 
 
 class StudentUpdateForm(ModelForm):
+
     class Meta:
         model = Student
-
 
     def __init__(self, *args, **kwargs):
         super(StudentUpdateForm, self).__init__(*args, **kwargs)
@@ -174,12 +174,16 @@ class StudentUpdateForm(ModelForm):
         self.helper.layout[-1] = Div(
             Div(
                 FormActions(
-                Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
-                Submit('cancel_button', u'Скасувати', css_class="btn-link"),
-            ), css_class = "alert alert-info"),
-            css_class = "col-md-6 col-md-offset-3",
-            css_id = "form_button")
-
+                    Submit(
+                        'add_button', u'Зберегти', css_class="btn btn-primary"),
+                    Submit(
+                        'cancel_button', u'Скасувати', css_class="btn-link"),
+                ),
+                css_class="alert alert-info"
+            ),
+            css_class="col-md-6 col-md-offset-3",
+            css_id="form_button"
+        )
 
 
 # Class for editing students
@@ -199,5 +203,10 @@ class StudentUpdateView(UpdateView):
             return super(StudentUpdateView, self).post(request, *args, **kwargs)
 
 
-def students_delete(request, sid):
-    return HttpResponse('<h1>Delete Student %s </h1>' % sid)
+class StudentDeleteView(DeleteView):
+    #model = Student
+    queryset = Student.objects.all()
+    template_name = 'students/students_confirm_delete.html'
+
+    def get_success_url(self):
+        return u'%s?success=1&status_message=Студент був успішно видалений!' % reverse('home')
