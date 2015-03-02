@@ -1,0 +1,36 @@
+{% extends "students/base.html" %}
+
+
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block meta_title %}Створити Групу{% endblock meta_title %}
+
+
+{% block status_message %}
+
+
+{% endblock status_message %}
+
+{% block content %}
+
+<!-- Form -->
+<div class="panel panel-info col-md-12 ">
+    {% if form.errors %}
+        <div class="alert alert-warning" role="alert">
+            <p>Будь ласка, виправте наступні помилки</p>
+        </div>
+    {% else %}
+        <div class="panel-heading" align="center">
+            <h4>Створити групу</h4>
+        </div>
+        <br />
+    {% endif %}
+
+    <div class="row" id="form">
+            {% crispy form %}
+    </div>
+</div>
+
+{% endblock content %}

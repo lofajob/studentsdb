@@ -11,7 +11,7 @@ textarea, select, input {
 	max-width: 250px;
 }
 
-/* Grops Selector */
+								/* Grops Selector */
 #group-selector {
 	margin-top: 10px;
 	padding: 5px;
@@ -48,16 +48,21 @@ textarea, select, input {
 	margin-bottom: 20px; 
 }
 
+#paginator {
+	text-align: center;
+}
+
+#submit_contact_btn {
+	margin-left: 195px;
+	margin-bottom: 15px;
+}
+
 									/* Classes*/
 .alert {
 	margin-top: 10px;
 }
 
-#paginator {
-	text-align: center;
-}
-
 .img-circle {
-	height: 35px ; 
-	width: 30px;		
+	height: 35px ;
+	width: 30px;
 }

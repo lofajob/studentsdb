@@ -210,3 +210,10 @@ class StudentDeleteView(DeleteView):
 
     def get_success_url(self):
         return u'%s?success=1&status_message=Студент був успішно видалений!' % reverse('home')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('cancel_button'):
+            return HttpResponseRedirect(
+                u'%s?success=0&status_message=Видалення студента відмінено!' % reverse('home'))
+        else:
+            return super(StudentDeleteView, self).post(request, *args, **kwargs)

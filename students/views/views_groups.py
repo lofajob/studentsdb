@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.forms import ModelForm
+from django.core.urlresolvers import reverse_lazy
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Div, Layout
+from crispy_forms.bootstrap import FormActions
 
 from ..models import Group, Student
 
@@ -34,17 +42,72 @@ def groups_list(request):
 
     return render(request, 'students/groups_list.html', {'content': groups})
 
+class GroupForm(ModelForm):
 
-def groups_add(request):
-    return HttpResponse('<h1>Group Add Form</h1>')
+    class Meta:
+        model = Group
+
+    def __init__(self, *args, **kwargs):
+        super(GroupForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        # set form tag attributes
+        self.helper.form_action = reverse('groups_add')
+        self.helper.form_method = 'POST'
+        self.helper.form_class = 'form-horizontal'
+
+        # set form field properties
+        self.helper.help_text_inline = True
+        self.helper.html5_required = True
+        self.helper.label_class = 'col-sm-5 control-label'
+        self.helper.field_class = 'col-sm-7'
+
+        # add buttons
+        self.helper.layout = Layout(
+            'title',
+            'leader',
+            'notes',
+            Div(
+                Div(
+                    FormActions(
+                        Submit(
+                            'add_button', u'Зберегти', css_class="btn btn-primary"),
+                        Submit(
+                            'cancel_button', u'Скасувати', css_class="btn-link"),
+                    ),
+                    css_class="alert alert-info"
+                ),
+                css_class="col-md-6 col-md-offset-3",
+                css_id="form_button"
+            )
+        )
+
+
+class GroupCreate(CreateView):
+    model = Group
+    form_class = GroupForm
+    success_url = reverse_lazy('groups')
 
 
 def groups_edit(request, sid):
     return HttpResponse('<h1>Edit Group %s </h1>' % sid)
 
 
-def groups_delete(request, sid):
-    return HttpResponse('<h1>Delete Group %s </h1>' % sid)
+class GroupDeleteView(DeleteView):
+    #model = Student
+    model = Group
+    template_name = 'students/groups_confirm_delete.html'
+
+    def get_success_url(self):
+        return u'%s?success=1&status_message=Група успішно видалена!' % reverse('groups')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('cancel_button'):
+            return HttpResponseRedirect(
+                u'%s?success=0&status_message=Видалення групи відмінено!' % reverse('groups'))
+        else:
+            return super(GroupDeleteView, self).post(request, *args, **kwargs)
 
 
 def students_in_group(request, sid):
