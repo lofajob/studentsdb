@@ -50,7 +50,7 @@
             <tr>
                 <td>{{ group.id }}</td>
                 <td><a href="{% url 'students_in_group' group.id %}">{{ group.title }}</a></td>
-                <td>{%if group.leader %} <a href="{% url 'students_edit' group.leader.id %}">{{ group.leader.first_name }} {{ group.leader.last_name }}</a>{% else %} Немає {% endif %}</td>
+                <td>{%if group.leader %} {{ group.leader.first_name }} {{ group.leader.last_name }}{% else %} Немає {% endif %}</td>
                 <td>
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">

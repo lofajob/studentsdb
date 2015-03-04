@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 #from students.views.contact_admin import Contact_admin
 from students.views.views_students import StudentUpdateView, StudentDeleteView
-from students.views.views_groups import GroupCreate, GroupDeleteView
+from students.views.views_groups import GroupCreate, GroupEdit, GroupDeleteView
 
 from .settings import MEDIA_ROOT, DEBUG
 
@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     # Groups urls
     url(r'^groups/$', 'students.views.views_groups.groups_list', name='groups'),
     url(r'^groups/add/$', GroupCreate.as_view(), name='groups_add'),
-    url(r'^groups/(?P<sid>\d+)/edit/$', 'students.views.views_groups.groups_edit', name='groups_edit'),
+    url(r'^groups/(?P<pk>\d+)/edit/$', GroupEdit.as_view(), name='groups_edit'),
     url(r'^groups/(?P<pk>\d+)/delete/$', GroupDeleteView.as_view(), name='groups_delete'),
     url(r'^groups/(?P<sid>\d+)/students_in_group/$', 'students.views.views_groups.students_in_group', name='students_in_group'),
 

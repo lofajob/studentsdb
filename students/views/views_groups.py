@@ -9,7 +9,7 @@ from django.forms import ModelForm
 from django.core.urlresolvers import reverse_lazy
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Div, Layout
+from crispy_forms.layout import Submit, Button, Div, Layout
 from crispy_forms.bootstrap import FormActions
 
 from ..models import Group, Student
@@ -29,7 +29,7 @@ def groups_list(request):
             groups = groups.reverse()
 
     # Paginate groups pages
-    paginator = Paginator(groups, 3)
+    paginator = Paginator(groups, 4)
     page = request.GET.get('page')
     try:
         groups = paginator.page(page)
@@ -42,6 +42,7 @@ def groups_list(request):
 
     return render(request, 'students/groups_list.html', {'content': groups})
 
+
 class GroupForm(ModelForm):
 
     class Meta:
@@ -52,7 +53,6 @@ class GroupForm(ModelForm):
 
         self.helper = FormHelper(self)
 
-        # set form tag attributes
         self.helper.form_action = reverse('groups_add')
         self.helper.form_method = 'POST'
         self.helper.form_class = 'form-horizontal'
@@ -83,19 +83,48 @@ class GroupForm(ModelForm):
             )
         )
 
+class GroupFormUpd(GroupForm):
+
+    def __init__(self, *args, **kwargs):
+        super(GroupFormUpd, self).__init__(*args, **kwargs)
+
+        self.helper.form_action = reverse(
+            'groups_edit', kwargs={'pk': kwargs['instance'].id})
+
 
 class GroupCreate(CreateView):
     model = Group
     form_class = GroupForm
     success_url = reverse_lazy('groups')
 
+    def get_success_url(self):
+        return u'%s?success=1&status_message=Група була успішно створена' % reverse('groups')
 
-def groups_edit(request, sid):
-    return HttpResponse('<h1>Edit Group %s </h1>' % sid)
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('cancel_button'):
+            return HttpResponseRedirect(
+                u'%s?success=0&status_message=Створення групи відмінено!' % reverse('groups'))
+        else:
+            return super(GroupCreate, self).post(request, *args, **kwargs)
+
+
+class GroupEdit(UpdateView):
+    model = Group
+    form_class = GroupFormUpd
+    success_url = reverse_lazy('groups')
+
+    def get_success_url(self):
+        return u'%s?success=1&status_message=Групу успішно відредаговано' % reverse('groups')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('cancel_button'):
+            return HttpResponseRedirect(
+                u'%s?success=0&status_message=Редагування групи відмінено!' % reverse('groups'))
+        else:
+            return super(GroupEdit, self).post(request, *args, **kwargs)
 
 
 class GroupDeleteView(DeleteView):
-    #model = Student
     model = Group
     template_name = 'students/groups_confirm_delete.html'
 
