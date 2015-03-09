@@ -4,37 +4,9 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, ValidationError
 
-from .models import Student, Group, Exam, Exam_result
-
-
-class StudentFormAdmin(ModelForm):
-
-    def clean_student_group(self):
-        """Check if student is leader in any group.
-
-        If yes, then ensure it's the same as selected group.  """
-
-        # get group where current studentd is a leader
-        groups = Group.objects.filter(leader=self.instance)
-        if len(groups) > 0 and \
-                self.cleaned_data['student_group'] not in groups:
-            raise ValidationError(
-                u'Студент є старостою іншої групи.', code='invalid')
-
-        return self.cleaned_data['student_group']
-
-
-class GroupFormAdmin(ModelForm):
-
-    def clean_leader(self):
-        students = Student.objects.filter(student_group=self.instance)
-        if len(students) > 0 and \
-                self.cleaned_data['leader'] not in students admin \
-                self.cleaned_data['leader'] is not None:
-            raise ValidationError(
-                u'Староста повинен бути студентом групи', code='invalid')
-
-        return self.cleaned_data['leader']
+from .models.student import Student
+from .models.group import Group
+from .models.exam import Exam, Exam_result
 
 
 # Method for copy action
@@ -44,6 +16,46 @@ def copy_items(modeladmin, request, queryset):
         object.pk = None
         object.save()
 copy_items.short_description = u"Копіювати обрані елементи"
+
+
+class StudentFormAdmin(ModelForm):
+
+    def clean_student_group(self):
+        """
+        Check if student is leader in any group.
+
+        If yes, then ensure it's the same as selected group.
+        """
+
+        # get a group where current student is a leader
+        groups = Group.objects.filter(leader=self.instance)
+        if len(groups) > 0 and \
+                self.cleaned_data['student_group'] != groups[0]:
+            raise ValidationError(u'Студент є старостою іншої групи.',
+                                  code='invalid')
+
+        return self.cleaned_data['student_group']
+
+
+class GroupFormAdmin(ModelForm):
+
+    def clean_leader(self):
+        """
+        If a student is in another group, then he can't be installed
+        """
+        # Set warning message
+        error_message = u'Студент %s не може бути старостою. Він належить до іншої групи'
+
+        students = Student.objects.filter(student_group=self.instance)
+
+        if self.cleaned_data['leader'] is None:
+            # Set empty value in leader attribute
+            setattr(self.instance, 'leader', self.cleaned_data['leader'])
+        elif self.cleaned_data['leader'] not in students:
+            raise ValidationError(error_message % (self.cleaned_data['leader']),
+                                  code='invalid')
+
+        return self.cleaned_data['leader']
 
 
 class StudentAdmin(admin.ModelAdmin):
