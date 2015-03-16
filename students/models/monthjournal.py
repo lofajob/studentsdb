@@ -29,5 +29,4 @@ class MonthJournal(models.Model):
 # the list of days, each says whether student was presense or not
 for day in range(1, 32):
     MonthJournal.add_to_class('present_day%s' % day,
-        models.BooleanField(default=False))
-
+                              models.BooleanField(default=False))

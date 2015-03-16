@@ -60,7 +60,7 @@
         {% endwith %}
 
         <tbody>
-            {% for student in content %}
+            {% for student in object_list %}
             <tr>
                 <td>{{ student.id }}</td>
                 {% if student.photo %}
@@ -68,8 +68,8 @@
                 {% else %}
                 <td><img class="img-circle" src="{% static 'img/default_user.png' %}"></td>
                 {% endif %}
-                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.last_name }}</a></td>
-                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.first_name }}</a></td>
+                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}" target="_blank">{{ student.last_name }}</a></td>
+                <td><a title="Редагувати" href="{% url 'students_edit' student.id %}" target="_blank">{{ student.first_name }}</a></td>
                 <td>{{ student.ticket }}</td>
                 <td>
                     <div class="dropdown">
@@ -91,6 +91,6 @@
     </table>
     <!-- End Table of Student Listing -->
 
-    {% include "students/pagination.html" %}
+        {% include "students/pagination.html" %}
 
 {% endblock content %}

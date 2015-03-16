@@ -1,8 +1,10 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 #from students.views.contact_admin import Contact_admin
-from students.views.views_students import StudentUpdateView, StudentDeleteView
-from students.views.views_groups import GroupCreate, GroupEdit, GroupDeleteView
+from students.views.views_students import StudentsView, StudentUpdateView, \
+                                          StudentDeleteView
+from students.views.views_groups import GroupsView, GroupCreate, \
+                                        GroupEdit, GroupDeleteView
 from students.views.views_journal import JournalView
 
 
@@ -14,7 +16,7 @@ urlpatterns = patterns('',
            # url(r'^blog/', include('blog.urls')),
 
            # Students urls
-           url(r'^$', 'students.views.views_students.students_list',
+           url(r'^$', StudentsView.as_view(),
                name='home'),
            url(r'^students/add/$',
             'students.views.views_students.students_add', name='students_add'),
@@ -24,7 +26,7 @@ urlpatterns = patterns('',
                name='students_delete'),
 
            # Groups urls
-           url(r'^groups/$', 'students.views.views_groups.groups_list',
+           url(r'^groups/$', GroupsView.as_view(),
                name='groups'),
            url(r'^groups/add/$', GroupCreate.as_view(),
                name='groups_add'),

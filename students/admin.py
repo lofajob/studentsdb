@@ -54,7 +54,8 @@ class GroupFormAdmin(ModelForm):
             # Set empty value in leader attribute
             setattr(self.instance, 'leader', self.cleaned_data['leader'])
         elif self.cleaned_data['leader'] not in students:
-            raise ValidationError(error_message % (self.cleaned_data['leader']),
+            raise ValidationError(error_message
+                                  % (self.cleaned_data['leader']),
                                   code='invalid')
 
         return self.cleaned_data['leader']

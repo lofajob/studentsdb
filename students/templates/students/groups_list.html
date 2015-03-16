@@ -16,7 +16,7 @@
     <a class="btn btn-primary btn-lg" href="{% url 'groups_add' %}" role="button">Додати Групу</a>
 
     <!-- Start of Table -->
-    {% if content %}
+    {% if object_list %}
     <table class="table table-hover table-striped">
 
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
@@ -46,7 +46,7 @@
         <!-- Content of Table -->
         <tbody>
             <!-- Groups Loop -->
-            {% for group in content %}
+            {% for group in object_list %}
             <tr>
                 <td>{{ group.id }}</td>
                 <td><a href="{% url 'students_in_group' group.id %}">{{ group.title }}</a></td>
@@ -76,6 +76,7 @@
 
     <!-- Paginator -->
 
-    {% include "students/pagination.html" %}
+        {% include "students/pagination.html" %}
+
 
 {% endblock content %}

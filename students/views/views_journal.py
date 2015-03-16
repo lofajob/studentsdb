@@ -46,8 +46,8 @@ class JournalView(TemplateView):
         myear, mmonth = month.year, month.month
         number_of_days = monthrange(myear, mmonth)[1]
         context['month_header'] = [{'day': d,
-                                    'verbose': day_abbr[weekday(myear, mmonth, d)][:2]}
-                                   for d in range(1, number_of_days + 1)]
+                            'verbose': day_abbr[weekday(myear, mmonth, d)][:2]}
+                            for d in range(1, number_of_days + 1)]
 
         # url to update studentpresence, for AJAX form post
         update_url = reverse('journal')
@@ -73,9 +73,7 @@ class JournalView(TemplateView):
                     'day': day,
                     'present': journal and getattr(journal, 'present_day%d' %
                                                    day, False) or False,
-                    'date': date(myear, mmonth, day).strftime(
-                        date_format),
-                })
+                    'date': date(myear, mmonth, day).strftime(date_format),})
 
             # prepare metadata for current student
             students.append({

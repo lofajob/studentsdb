@@ -4,15 +4,6 @@
     <!-- Pagination -->
     {% if is_paginated %}
 
-        <!-- define variable for actual page -->
-        {% if request.path == 'home' %}
-            {% url 'home' as current_url %}
-
-        {% elif request.path == 'groups' %}
-            {% url 'groups' as current_url %}
-
-        {% endif %}
-
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
         <nav id="paginator">
             <ul class="pagination" >
