@@ -2,36 +2,37 @@
 
 {% block pagination %}
     <!-- Pagination -->
-    {% if content.has_other_pages %}
+    {% if is_paginated %}
 
-    <!-- define variable for actual page -->
-    {% if request.path == 'home' %}  
-        {% url 'home' as current_url %}
+        <!-- define variable for actual page -->
+        {% if request.path == 'home' %}
+            {% url 'home' as current_url %}
 
-    {% elif request.path == 'groups' %}
-        {% url 'groups' as current_url %}
+        {% elif request.path == 'groups' %}
+            {% url 'groups' as current_url %}
 
-    {% endif %}
+        {% endif %}
 
-
-    {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
-    <nav id="paginator">
-        <ul class="pagination" >
-            {% if content.has_previous %}
-            <li><a href="{{ current_url }}?page=1{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}">&laquo;</a></li>
-            {% endif %}
-            {% for p in content.paginator.page_range %}
-            <li {% if content.number == p %}class="active"{% endif %}>
-                <a href="{{ current_url }}?page={{ p }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}">{{ p }}</a>
-            </li>
-            {% endfor %}
-            {% if content.has_next %}
-            <li>
-                <a href="{{ current_url }}?page={{ content.paginator.num_pages }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}">&raquo;</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endwith %}
+        {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+        <nav id="paginator">
+            <ul class="pagination" >
+                {% if object_list.has_previous %}
+                <li>
+                    <a href="?page=1{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}{% if cur_month %}&amp;month={{ cur_month }}{% endif %}">&laquo;</a>
+                </li>
+                {% endif %}
+                {% for p in object_list.paginator.page_range %}
+                <li {% if object_list.number == p %}class="active"{% endif %}>
+                    <a href="?page={{ p }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{% endif %}{% if cur_month %}&amp;month={{ cur_month }}{% endif %}">{{ p }}</a>
+                </li>
+                {% endfor %}
+                {% if object_list.has_next %}
+                <li>
+                    <a href="?page={{ object_list.paginator.num_pages }}{% if order_by %}&amp;order_by={{ order_by }}{% endif %}{% if reverse %}&amp;reverse={{ reverse }}{%endif %}">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endwith %}
     {% endif %}
 {% endblock %}

@@ -7,6 +7,7 @@ from django.forms import ModelForm, ValidationError
 from .models.student import Student
 from .models.group import Group
 from .models.exam import Exam, Exam_result
+from .models.monthjournal import MonthJournal
 
 
 # Method for copy action
@@ -44,7 +45,8 @@ class GroupFormAdmin(ModelForm):
         If a student is in another group, then he can't be installed
         """
         # Set warning message
-        error_message = u'Студент %s не може бути старостою. Він належить до іншої групи'
+        error_message = u'Студент %s не може бути старостою. \
+                          Він належить до іншої групи'
 
         students = Student.objects.filter(student_group=self.instance)
 
@@ -91,3 +93,4 @@ admin.site.register(Student, StudentAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Exam)
 admin.site.register(Exam_result)
+admin.site.register(MonthJournal)

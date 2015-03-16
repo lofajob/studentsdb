@@ -40,7 +40,7 @@ def groups_list(request):
         # if page is out of range (e.g. 9999), deliver last page result
         groups = paginator.page(paginator.num_pages)
 
-    return render(request, 'students/groups_list.html', {'content': groups})
+    return render(request, 'students/groups_list.html', {'object_list': groups})
 
 
 class GroupForm(ModelForm):

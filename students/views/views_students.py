@@ -40,7 +40,7 @@ def students_list(request):
         # if page is out of range (e.g. 9999), deliver last page result
         students = paginator.page(paginator.num_pages)
 
-    return render(request, 'students/students_list.html', {'content': students})
+    return render(request, 'students/students_list.html', {'object_list': students})
 
 
 def students_add(request):

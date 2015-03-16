@@ -3,3 +3,4 @@ Pillow
 MySQL-python
 django-crispy-forms==1.4.0
 django-contact-form
+python-dateutil

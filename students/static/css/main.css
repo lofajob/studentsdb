@@ -1,4 +1,4 @@
-								/* Global Styles */
+ 								/* Global Styles */
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 }
@@ -45,7 +45,7 @@ textarea, select, input {
 	margin: 0px 0;
 }
 #form_header{
-	margin-bottom: 20px; 
+	margin-bottom: 20px;
 }
 
 #paginator {
@@ -57,6 +57,10 @@ textarea, select, input {
 	margin-bottom: 15px;
 }
 
+#ajax-progress-indicator {
+	display: none;
+}
+
 									/* Classes*/
 .alert {
 	margin-top: 10px;
@@ -65,4 +69,12 @@ textarea, select, input {
 .img-circle {
 	height: 35px ;
 	width: 30px;
+}
+
+									/* Journal Table Styles */
+td.day-box,
+th.day-header {
+	padding: 4px !important;
+	vertical-align: middle !important;
+	text-align: center;
 }

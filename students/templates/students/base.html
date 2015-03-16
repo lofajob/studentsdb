@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="uk">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Сервіс обліку студентів - {% block meta_title %}{% endblock meta_title %}</title>
 		<meta name="description"
 			value="Students Accounting Service for educational institution" />
@@ -102,7 +102,9 @@
         <!-- End Container -->
 
         <!-- Javascript section -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="{% static "js/main.js" %}"></script>
+        {% block extra_js %}{% endblock extra_js %}
     </body>
 </html>
