@@ -39,8 +39,9 @@ urlpatterns = patterns('',
                name='students_in_group'),
 
            # Journal urls
-           url(r'^journal/$', JournalView.as_view(),
+           url(r'^journal/(?P<pk>\d+)?/?$', JournalView.as_view(),
                name='journal'),
+
 
 
            # Exams urls

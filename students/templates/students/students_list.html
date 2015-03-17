@@ -78,7 +78,7 @@
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/journal/1">Відвідування</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'journal' student.id %}">Відвідування</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'students_edit' student.id %}">Редагувати</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'students_delete' student.id %}">Видалити</a></li>
                       </ul>
