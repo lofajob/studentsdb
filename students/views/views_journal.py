@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.http import JsonResponse
 
 from ..models import Student, MonthJournal
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 
 class JournalView(TemplateView):
@@ -52,10 +52,14 @@ class JournalView(TemplateView):
         # url to update studentpresence, for AJAX form post
         update_url = reverse('journal')
 
-        # get all students from database, or just one if we need to
-        # display journal for one student
+        current_group = get_current_group(self.request)
+
+        # get students from database. Check which amongh we need (one,
+        # group of students, or all students)
         if kwargs.get('pk'):
             queryset = [Student.objects.get(pk=kwargs['pk'])]
+        elif current_group:
+            queryset = Student.objects.filter(student_group=current_group)
         else:
             queryset = Student.objects.all().order_by('last_name')
 
@@ -77,7 +81,7 @@ class JournalView(TemplateView):
                     'day': day,
                     'present': journal and getattr(journal, 'present_day%d' %
                                                    day, False) or False,
-                    'date': date(myear, mmonth, day).strftime(date_format),})
+                    'date': date(myear, mmonth, day).strftime(date_format), })
 
             # prepare metadata for current student
             students.append({

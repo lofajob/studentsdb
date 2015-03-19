@@ -16,7 +16,7 @@ from datetime import datetime
 from PIL import Image
 
 from ..models import Student, Group
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 
 class StudentsView(TemplateView):
@@ -26,7 +26,13 @@ class StudentsView(TemplateView):
         # get context data from TemplateView class
         context = super(StudentsView, self).get_context_data(**kwargs)
 
-        object_list = Student.objects.all()
+        # check if we need to show only one group of students
+        current_group = get_current_group(self.request)
+        if current_group:
+            object_list = Student.objects.filter(student_group=current_group)
+        else:
+            # otherwise show all students
+            object_list = Student.objects.all()
 
         # try to order student list
         order_by = self.request.GET.get('order_by', '')

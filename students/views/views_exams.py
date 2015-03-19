@@ -3,14 +3,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from ..models import Exam, Exam_result
+from ..util import get_current_group
 
 
 # Views for Groups
 
 
 def exams_list(request):
-    exams = Exam.objects.all()
+    # check if we need to show only one group of students
+    current_group = get_current_group(request)
+    if current_group:
+        exams = Exam.objects.filter(group_examing=current_group)
+    else:
+        # otherwise show all students
+        exams = Exam.objects.all()
 
     # try to order exams list
     order_by = request.GET.get('order_by', '')
@@ -33,7 +41,8 @@ def exam_result(request, sid):
         if request.GET.get('reverse', '') == '1':
             results = results.reverse()
 
-    return render(request, 'students/exam_result.html', {'results': results, 'exam': exam})
+    return render(request, 'students/exam_result.html',
+                  {'results': results, 'exam': exam})
 
 
 def exam_add(request):
