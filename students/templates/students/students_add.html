@@ -51,14 +51,14 @@
             </div>
 
             <div class="form-group">
-                <label for="middle_name" class="col-sm-5    control-label">По-батькові:</label>
+                <label for="middle_name" class="col-sm-5 control-label">По-батькові:</label>
                 <div class="col-sm-7">
                     <input type="text" value="{{ request.POST.middle_name }}" class="form-control" id="middle_name" name="middle_name" placeholder="Введіть Ваше ім’я по батькові" />
                 </div>
             </div>
 
             <div class="form-group {% if errors.ticket %}has-error{% endif %}">
-                <label for="ticket" class="col-sm-5    control-label">Білет*</label>
+                <label for="ticket" class="col-sm-5 control-label">Білет*</label>
                 <div class="col-sm-7">
                     <input type="text" value="{{ request.POST.ticket }}" class="form-control" id="ticket" name="ticket" placeholder="Введіть номер білету" />
                     <span class="help-block">{{ errors.ticket }}</span>
@@ -66,9 +66,16 @@
             </div>
 
             <div class="form-group {% if errors.birthday %}has-error{% endif %}">
-                <label for="birthday" class="col-sm-5    control-label">Дата народження*</label>
-                <div class="col-sm-7">
-                    <input type="text" value="{{ request.POST.birthday }}" class="form-control" id="birthday" name="birthday" placeholder="Напр. 1984-12-30" />
+                <label for="birthday" class="col-sm-5 control-label">Дата народження*</label>
+                <div class="col-sm-5">
+                    <div class='input-group date col-sm-7' id='datetimepicker1'>
+                        <input type="text" value="{{ request.POST.birthday }}"
+                          class="form-control" id="birthday"
+                          name="birthday" placeholder="Напр. 1984-12-30" />
+                          <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </span>
+                    </div>
                     <span class="help-block">{{ errors.birthday }}</span>
                 </div>
             </div>
@@ -111,6 +118,7 @@
                 </div>
             </div>
         </form>
+
     </div>
 </div>
 

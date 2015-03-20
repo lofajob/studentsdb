@@ -193,7 +193,6 @@ class StudentUpdateForm(ModelForm):
             css_id="form_button"
         )
 
-
 class StudentUpdateView(UpdateView):
 
     """Class for editing students"""

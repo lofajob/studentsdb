@@ -12,12 +12,12 @@ from ..util import get_current_group
 
 
 def exams_list(request):
-    # check if we need to show only one group of students
+    # check if we need to show results for only one group of students
     current_group = get_current_group(request)
     if current_group:
         exams = Exam.objects.filter(group_examing=current_group)
     else:
-        # otherwise show all students
+        # otherwise show results for all groups
         exams = Exam.objects.all()
 
     # try to order exams list

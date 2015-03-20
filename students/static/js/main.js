@@ -59,8 +59,24 @@ function initGroupSelector() {
     });
 }
 
+function initDateFields() {
+    $('input.dateinput').datetimepicker({
+        'format': 'YYYY-MM-DD'
+    }).on('dp.hide', function(event){
+        $(this).blur();
+    });
+}
+
+function initDateFields_1() {
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD',
+        //locale: moment.lang('uk')
+    });
+};
 
 $(document).ready(function() {
     initJournal();
     initGroupSelector();
+    initDateFields();
+    initDateFields_1();
 });
