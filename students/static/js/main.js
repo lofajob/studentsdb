@@ -61,7 +61,8 @@ function initGroupSelector() {
 
 function initDateFields() {
     $('input.dateinput').datetimepicker({
-        'format': 'YYYY-MM-DD'
+        'format': 'YYYY-MM-DD',
+        locale: moment.lang('uk')
     }).on('dp.hide', function(event){
         $(this).blur();
     });
@@ -70,7 +71,7 @@ function initDateFields() {
 function initDateFields_1() {
     $('#datetimepicker1').datetimepicker({
         format: 'YYYY-MM-DD',
-        //locale: moment.lang('uk')
+        locale: moment.lang('uk')
     });
 };
 
