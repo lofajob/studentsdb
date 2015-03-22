@@ -75,9 +75,44 @@ function initDateFields_1() {
     });
 };
 
+function initEditStudentPage() {
+    $('a.student_edit_form_link').click(function(event){
+        var link = $(this);
+        error_message = "Помилка на сервері. Спробуйте будь ласка пізніше.";
+        $.ajax({
+            'url': link.attr('href'),
+            'dataType': 'html',
+            'type': 'get',
+            'success': function(data, status, xhr){
+                //check if we got successfull response from the server
+                if (status != 'success') {
+                    alert(error_message);
+                    return false;
+                }
+
+                // update modal window with arrived contennt from the server
+                var modal = $('#myModal'),
+                    html = $(data), form = html.find('#content-column form');
+                modal.find('.modal-title').html(html.find('#content-column h4').text());
+                modal.find('.modal-body').html(form);
+
+                // setup and show modal window finally
+                modal.modal('show');
+            },
+            'error': function(){
+                alert(error_message);
+                return false
+            }
+        });
+
+        return false;
+    });
+}
+
 $(document).ready(function() {
     initJournal();
     initGroupSelector();
     initDateFields();
     initDateFields_1();
+    initEditStudentPage();
 });

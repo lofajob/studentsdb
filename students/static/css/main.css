@@ -37,7 +37,7 @@ textarea, select, input, #datetimepicker1 {
 	padding-top: 10px;
 }
 
-#month, #form_button, #form_header {
+#month, #form_button, #form_header, .modal-title {
 	text-align: center; ;
 }
 

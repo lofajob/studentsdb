@@ -187,9 +187,9 @@ class StudentUpdateForm(ModelForm):
                     Submit(
                         'cancel_button', u'Скасувати', css_class="btn-link"),
                 ),
-                css_class="alert alert-info"
+            #css_class="alert alert-info"
             ),
-            css_class="col-md-6 col-md-offset-3",
+            #css_class="col-md-6 col-md-offset-2",
             css_id="form_button"
         )
 
