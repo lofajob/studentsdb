@@ -36,6 +36,7 @@ function initJournal() {
     });
 }
 
+
 function initGroupSelector() {
     // look up select element with groups attach our even handler
     // on field "change" event
@@ -59,6 +60,7 @@ function initGroupSelector() {
     });
 }
 
+
 function initDateFields() {
     $('input.dateinput').datetimepicker({
         'format': 'YYYY-MM-DD',
@@ -75,10 +77,54 @@ function initDateFields_1() {
     });
 };
 
+
+function initEditStudentForm(form, modal) {
+    // attach datepicker
+    initDateFields();
+
+    // close modal window on Cancel button click
+    form.find('input[name="cancel_button"]').click(function(event){
+        modal.modal('hide');
+        return false;
+    });
+
+    // make form work in AJAX mode
+    form.ajaxForm({
+        'dataType': 'html',
+        'error': function(){
+            alert('Помилка на сервері. Спробуйте будь ласка пізніше.');
+            return dalse;
+        },
+        'success': function(data, status, xhr) {
+            var html = $(data), newform = html.find('#content-column form');
+
+            // copy alert to modal window
+            modal.find('.modal-body').html(html.find('.alert'));
+
+            // copy form to modal if we found it in server response
+            if (newform.length > 0) {
+                modal.find('.modal-body').append(newform);
+
+                // initialize form fields and buttons
+                initEditStudentForm(newform, modal);
+            } else {
+                // if no form, it means success and we need to reload page
+                // to get updated students list;
+                // reload after 2 seconds, so that user can read
+                // success message
+                setTimeout(function(){
+                    location.reload(true);
+                }, 500);
+            }
+        }
+    });
+}
+
+
 function initEditStudentPage() {
     $('a.student_edit_form_link').click(function(event){
         var link = $(this);
-        error_message = "Помилка на сервері. Спробуйте будь ласка пізніше.";
+        var error_message = "Помилка на сервері. Спробуйте будь ласка пізніше.";
         $.ajax({
             'url': link.attr('href'),
             'dataType': 'html',
@@ -96,6 +142,9 @@ function initEditStudentPage() {
                 modal.find('.modal-title').html(html.find('#content-column h4').text());
                 modal.find('.modal-body').html(form);
 
+                // init our edit form
+                initEditStudentForm(form, modal);
+
                 // setup and show modal window finally
                 modal.modal('show');
             },
@@ -109,10 +158,11 @@ function initEditStudentPage() {
     });
 }
 
+
 $(document).ready(function() {
     initJournal();
     initGroupSelector();
-    initDateFields();
+    //initDateFields();
     initDateFields_1();
     initEditStudentPage();
 });
