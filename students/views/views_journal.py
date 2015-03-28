@@ -106,7 +106,7 @@ class JournalView(TemplateView):
         current_date = datetime.strptime(data['date'], '%Y-%m-%d').date()
         month = date(current_date.year, current_date.month, 1)
         present = data['present'] and True or False
-        #student = Student.objects.get(pk=data['pk'])
+        student = Student.objects.get(pk=data['pk'])
 
         # get or create journal object for given student and month
         journal = MonthJournal.objects.get_or_create(student=student,

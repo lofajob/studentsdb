@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+from PIL import Image
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -11,9 +14,6 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Div
 from crispy_forms.bootstrap import FormActions
-
-from datetime import datetime
-from PIL import Image
 
 from ..models import Student, Group
 from ..util import paginate, get_current_group
@@ -181,11 +181,10 @@ class StudentUpdateForm(ModelForm):
         self.helper.layout[-1] = Div(
             Div(
                 FormActions(
-                    Submit(
-                        'add_button', u'Зберегти',
-                        css_class="btn btn-primary"),
-                    Submit(
-                        'cancel_button', u'Скасувати', css_class="btn-link"),
+                    Submit('add_button', u'Зберегти', \
+                            css_class="btn btn-primary"),
+                    Submit('cancel_button', u'Скасувати', \
+                            css_class="btn-link"),
                 ),
                 #css_class="alert alert-info"
             ),

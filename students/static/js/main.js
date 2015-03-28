@@ -114,7 +114,7 @@ function initEditStudentForm(form, modal) {
                 // success message
                 setTimeout(function(){
                     location.reload(true);
-                }, 500);
+                }, 300);
             }
         }
     });
@@ -138,7 +138,8 @@ function initEditStudentPage() {
 
                 // update modal window with arrived contennt from the server
                 var modal = $('#myModal'),
-                    html = $(data), form = html.find('#content-column form');
+                    html = $(data),
+                    form = html.find('#content-column form');
                 modal.find('.modal-title').html(html.find('#content-column h4').text());
                 modal.find('.modal-body').html(form);
 
@@ -146,7 +147,11 @@ function initEditStudentPage() {
                 initEditStudentForm(form, modal);
 
                 // setup and show modal window finally
-                modal.modal('show');
+                modal.modal({
+                    'keyboard': false,
+                    'backdrop': false,
+                    'show': true
+                });
             },
             'error': function(){
                 alert(error_message);
