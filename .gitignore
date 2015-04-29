@@ -1,0 +1,9 @@
+*.pyc
+*~
+*.egg-info
+*.mo
+*.egg
+*.log
+*.sublime-project
+*.sublime-workspace
+.idea*

@@ -64,7 +64,7 @@
             <tr>
                 <td>{{ student.id }}</td>
                 {% if student.photo %}
-                <td><img class="img-circle" src="{{ student.photo.url }}"></td>
+                <td><a href="{{ student.photo.url }}" data-gallery><img class="img-circle" src="{{ student.photo.url }}"></a></td>
                 {% else %}
                 <td><img class="img-circle" src="{% static 'img/default_user.png' %}"></td>
                 {% endif %}

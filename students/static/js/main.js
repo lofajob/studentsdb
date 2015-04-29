@@ -93,13 +93,13 @@ function initEditStudentForm(form, modal) {
         'dataType': 'html',
         'error': function(){
             alert('Помилка на сервері. Спробуйте будь ласка пізніше.');
-            return dalse;
+            return false;
         },
         'success': function(data, status, xhr) {
             var html = $(data), newform = html.find('#content-column form');
 
             // copy alert to modal window
-            modal.find('.modal-body').html(html.find('.alert'));
+            //modal.find('.modal-body').html(html.find('.alert'));
 
             // copy form to modal if we found it in server response
             if (newform.length > 0) {
@@ -114,7 +114,7 @@ function initEditStudentForm(form, modal) {
                 // success message
                 setTimeout(function(){
                     location.reload(true);
-                }, 300);
+                }, 10);
             }
         }
     });
@@ -136,7 +136,7 @@ function initEditStudentPage() {
                     return false;
                 }
 
-                // update modal window with arrived contennt from the server
+                // update modal window with arrived content from the server
                 var modal = $('#myModal'),
                     html = $(data),
                     form = html.find('#content-column form');
@@ -163,11 +163,11 @@ function initEditStudentPage() {
     });
 }
 
-
 $(document).ready(function() {
     initJournal();
     initGroupSelector();
     //initDateFields();
     initDateFields_1();
     initEditStudentPage();
+
 });
